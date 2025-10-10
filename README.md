@@ -2,15 +2,15 @@
 
 Personal collection of browser userscripts and small utilities.
 
-## Dependencies
-
-- Tampermonkey (or a compatible userscript manager)
-
 ## emacs-input.user.js
 
 - File: `emacs-input.user.js`
 - Purpose: Emacs-style editing keys for `input` and `textarea` elements on web pages.
 - Scope: Regular web pages only; extension pages (e.g., `chrome-extension://`) are not controlled by userscripts.
+
+### Dependencies
+
+- Tampermonkey (or a compatible userscript manager)
 
 ### Install
 
@@ -42,3 +42,54 @@ Note: Browser/system-reserved shortcuts (e.g., `Ctrl+T`, `Ctrl+W`, sometimes `Ct
 
 - Userscripts cannot run in extension pages (`chrome-extension://`).
 - `input[type=number]` is excluded due to inconsistent selection APIs.
+
+## translator.py
+
+- File: `translator.py`
+- Purpose: translate in terminal
+
+### Dependencies
+
+optional uv
+
+without uv, make sure you have python environment with `pip install requests`
+
+### Feature
+
+- google (default)
+- azure
+- baidu
+- youdao
+- bing
+- ciba
+- deeplx
+
+### Config
+
+Path: `~/.config/translator/config.toml`
+
+```toml
+[default]
+timeout = 5
+proxy = "<your proxy address>"
+
+
+[deeplx]
+url = "https://api.deeplx.org/<your-api-key>/translate"
+```
+
+### Usage
+
+usage: translator.py {--engine=xx} {--from=xx} {--to=xx}
+
+example:
+
+```sh
+chmod +x translator.py
+ln -sf translator.py ~/.local/bin/ts
+ts --engine=google --from=zh --to=en 正在测试翻译一段话
+```
+
+### Knowledge
+
+the raw code is from https://github.com/skywind3000/translator/blob/master/translator.py
