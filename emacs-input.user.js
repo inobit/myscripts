@@ -446,7 +446,7 @@
           deleteWordForward(t);
           handled = true;
           break;
-        case "backspace":
+        case "w":
           deleteWordBackward(t);
           handled = true;
           break;

@@ -27,7 +27,7 @@ Personal collection of browser userscripts and small utilities.
 - `C-h`: delete char backward (Backspace)
 - `C-k`: kill to end of line (joins next line if at end)
 - `M-b` / `M-f`: backward/forward word
-- `M-d` / `M-Backspace`: delete word forward/backward
+- `M-d` / `M-w`: delete word forward/backward
 - `C-n` / `C-p` (textarea only): next/previous line
 
 Note: Browser/system-reserved shortcuts (e.g., `Ctrl+T`, `Ctrl+W`, sometimes `Ctrl+E`) cannot be intercepted by page scripts.
