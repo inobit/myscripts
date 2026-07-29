@@ -1,0 +1,16 @@
+{
+  "name": "translation-userscript",
+  "version": "0.1.0",
+  "description": "划词翻译 + 输入弹窗翻译油猴脚本，支持 Google、DeepLX、DeepSeek 多 provider 并行翻译",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "vite": "^8.0.0",
+    "vite-plugin-monkey": "^8.1.0"
+  }
+}
