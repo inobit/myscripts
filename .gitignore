@@ -1,1 +1,31 @@
-__pycache__
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Env files
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+*.log.*
+
+# pnpm
+.pnpm-debug.log*
+
+# TypeScript
+*.tsbuildinfo
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
