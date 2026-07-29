@@ -12,7 +12,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - uses: pnpm/action-setup@v4
         with:
@@ -41,7 +41,7 @@ jobs:
         run: pnpm --filter "${{ steps.project.outputs.pkg-name }}" build
 
       - name: Create Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           name: "${{ steps.project.outputs.project }} ${{ steps.project.outputs.version }}"
           files: ${{ steps.project.outputs.project }}/dist/${{ steps.project.outputs.pkg-name }}.user.js
