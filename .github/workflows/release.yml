@@ -3,8 +3,7 @@ name: Release
 on:
   push:
     tags:
-      - 'translation/v*'
-      - 'emacs-input/v*'
+      - '*/v*'
 
 jobs:
   release:
@@ -12,43 +11,35 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Determine project from tag
-        id: project
-        run: |
-          TAG="${{ github.ref_name }}"
-          PROJECT="${TAG%%/*}"
-          echo "project=$PROJECT" >> $GITHUB_OUTPUT
-          echo "version=${TAG#*/}" >> $GITHUB_OUTPUT
-
       - uses: pnpm/action-setup@v4
-        if: steps.project.outputs.project == 'translation'
         with:
           version: latest
 
       - uses: actions/setup-node@v4
-        if: steps.project.outputs.project == 'translation'
         with:
           node-version: '24'
           cache: pnpm
 
       - name: Install dependencies
-        if: steps.project.outputs.project == 'translation'
         run: pnpm install --frozen-lockfile
 
-      - name: Build translation
-        if: steps.project.outputs.project == 'translation'
-        run: pnpm --filter translation-userscript build
+      - name: Determine project info
+        id: project
+        run: |
+          TAG="${{ github.ref_name }}"
+          PROJECT="${TAG%%/*}"
+          VERSION="${TAG#*/}"
+          PKG_NAME=$(node -p "require('./${PROJECT}/package.json').name")
+          echo "project=${PROJECT}" >> $GITHUB_OUTPUT
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+          echo "pkg-name=${PKG_NAME}" >> $GITHUB_OUTPUT
 
-      - name: Set asset path for translation
-        if: steps.project.outputs.project == 'translation'
-        run: echo "ASSET=translation/dist/translation-userscript.user.js" >> $GITHUB_ENV
-
-      - name: Set asset path for emacs-input
-        if: steps.project.outputs.project == 'emacs-input'
-        run: echo "ASSET=emacs-input/emacs-input.user.js" >> $GITHUB_ENV
+      - name: Build
+        run: pnpm --filter "${{ steps.project.outputs.pkg-name }}" build
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           name: "${{ steps.project.outputs.project }} ${{ steps.project.outputs.version }}"
-          files: ${{ env.ASSET }}
+          files: ${{ steps.project.outputs.project }}/dist/${{ steps.project.outputs.pkg-name }}.user.js
+

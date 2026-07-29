@@ -6,7 +6,7 @@ settings:
 
 importers:
 
-  emacs-input:
+  .:
     devDependencies:
       typescript:
         specifier: ^5.7.0
@@ -18,17 +18,9 @@ importers:
         specifier: ^8.1.0
         version: 8.1.0(postcss@8.5.23)(vite@8.1.5)
 
-  translation:
-    devDependencies:
-      typescript:
-        specifier: ^5.7.0
-        version: 5.9.3
-      vite:
-        specifier: ^8.0.0
-        version: 8.1.5
-      vite-plugin-monkey:
-        specifier: ^8.1.0
-        version: 8.1.0(postcss@8.5.23)(vite@8.1.5)
+  emacs-input: {}
+
+  translation: {}
 
 packages:
 
