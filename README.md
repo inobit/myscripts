@@ -19,7 +19,7 @@ pnpm --filter translation-userscript dev     # dev mode with HMR
 pnpm --filter translation-userscript build   # output to dist/
 ```
 
-Install: Open `translation/dist/translation-userscript.user.js` in Tampermonkey.
+Install: [translation-userscript.user.js](https://github.com/inobit/myscripts/releases/download/translation/v0.2.0/translation-userscript.user.js)
 
 ### emacs-input
 
@@ -30,7 +30,7 @@ pnpm --filter emacs-input-userscript dev     # dev mode with HMR
 pnpm --filter emacs-input-userscript build   # output to dist/
 ```
 
-Install: Open `emacs-input/dist/emacs-input-userscript.user.js` in Tampermonkey.
+Install: [emacs-input-userscript.user.js](https://github.com/inobit/myscripts/releases/download/emacs-input/v0.2.0/emacs-input-userscript.user.js)
 
 ## Build All
 
