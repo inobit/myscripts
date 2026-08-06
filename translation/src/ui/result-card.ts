@@ -18,6 +18,7 @@ const CLOSE_CHAR = '×';
 const PROVIDER_NAMES: Record<string, string> = {
   google: 'Google',
   deepLX: 'DeepLX',
+  volcano: '火山翻译',
   deepseek: 'DeepSeek',
   opencode: 'OpenCode',
 };

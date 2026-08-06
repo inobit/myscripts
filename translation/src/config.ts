@@ -12,6 +12,12 @@ export const DEFAULT_CONFIG: Config = {
       url: 'https://api.deeplx.org/<your-api-key>/translate',
       timeout: 3000,
     },
+    volcano: {
+      enabled: false,
+      accessKey: '',
+      secretKey: '',
+      timeout: 5000,
+    },
     deepseek: {
       enabled: false,
       endpoint: 'https://api.deepseek.com/v1/chat/completions',

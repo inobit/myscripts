@@ -104,6 +104,32 @@ export function showSettingsPanel(config: Config, onSave: (config: Config) => vo
   providerGroup.appendChild(deepLXInput);
   providerGroup.appendChild(deepLXTimeout);
 
+  // 火山翻译
+  const volcanoWrap = createCheckbox('volcano', '火山翻译', config.providers.volcano.enabled);
+  const volcanoInputs = document.createElement('div');
+  volcanoInputs.className = 'tr-hidden';
+  volcanoInputs.style.marginLeft = '24px';
+  volcanoInputs.style.marginTop = '6px';
+
+  const volcanoAccessKey = createPasswordInput('volcano-access-key', 'AccessKey ID', config.providers.volcano.accessKey);
+  const volcanoSecretKey = createPasswordInput('volcano-secret-key', 'Secret Access Key', config.providers.volcano.secretKey);
+  const volcanoTimeout = createNumberInput('volcano-timeout', '超时(ms)', config.providers.volcano.timeout);
+
+  volcanoInputs.appendChild(volcanoAccessKey);
+  volcanoInputs.appendChild(volcanoSecretKey);
+  volcanoInputs.appendChild(volcanoTimeout);
+
+  const volcanoToggle = volcanoWrap.querySelector('input[type="checkbox"]') as HTMLInputElement;
+  volcanoToggle.addEventListener('change', () => {
+    volcanoInputs.classList.toggle('tr-hidden', !volcanoToggle.checked);
+  });
+  if (config.providers.volcano.enabled) {
+    volcanoInputs.classList.remove('tr-hidden');
+  }
+
+  providerGroup.appendChild(volcanoWrap);
+  providerGroup.appendChild(volcanoInputs);
+
   // DeepSeek (LLM)
   const deepseekWrap = createCheckbox('deepseek', 'DeepSeek', config.providers.deepseek.enabled);
   const deepseekInputs = document.createElement('div');
@@ -204,6 +230,10 @@ export function showSettingsPanel(config: Config, onSave: (config: Config) => vo
     const deepLXCb = deepLXWrap.querySelector('input[type="checkbox"]') as HTMLInputElement;
     const deepLXUrlEl = deepLXInput.querySelector('input') as HTMLInputElement;
     const deepLXTimeoutEl = deepLXTimeout.querySelector('input') as HTMLInputElement;
+    const volcanoCb = volcanoWrap.querySelector('input[type="checkbox"]') as HTMLInputElement;
+    const volcanoAccessKeyEl = volcanoAccessKey.querySelector('input') as HTMLInputElement;
+    const volcanoSecretKeyEl = volcanoSecretKey.querySelector('input') as HTMLInputElement;
+    const volcanoTimeoutEl = volcanoTimeout.querySelector('input') as HTMLInputElement;
     const deepseekCb = deepseekWrap.querySelector('input[type="checkbox"]') as HTMLInputElement;
     const deepseekEndpointEl = deepseekEndpoint.querySelector('input') as HTMLInputElement;
     const deepseekKeyEl = deepseekKey.querySelector('input') as HTMLInputElement;
@@ -216,7 +246,7 @@ export function showSettingsPanel(config: Config, onSave: (config: Config) => vo
     const opencodeTimeoutEl = opencodeTimeout.querySelector('input') as HTMLInputElement;
 
     // 至少启用一个翻译 provider
-    if (!googleCb.checked && !deepLXCb.checked && !deepseekCb.checked && !opencodeCb.checked) {
+    if (!googleCb.checked && !deepLXCb.checked && !volcanoCb.checked && !deepseekCb.checked && !opencodeCb.checked) {
       alert('请至少启用一个翻译引擎');
       return;
     }
@@ -234,6 +264,12 @@ export function showSettingsPanel(config: Config, onSave: (config: Config) => vo
           enabled: deepLXCb.checked,
           url: deepLXUrlEl?.value || '',
           timeout: parseInt(deepLXTimeoutEl?.value || '3000', 10) || 3000,
+        },
+        volcano: {
+          enabled: volcanoCb.checked,
+          accessKey: volcanoAccessKeyEl?.value || '',
+          secretKey: volcanoSecretKeyEl?.value || '',
+          timeout: parseInt(volcanoTimeoutEl?.value || '5000', 10) || 5000,
         },
         deepseek: {
           enabled: deepseekCb.checked,

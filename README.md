@@ -12,7 +12,7 @@ Browser userscripts built with TypeScript + Vite.
 
 ### translation
 
-划词翻译 + 输入弹窗翻译，支持 Google、DeepLX、DeepSeek 多引擎并行翻译。
+划词翻译 + 输入弹窗翻译，支持 Google、DeepLX、DeepSeek、火山翻译多引擎并行翻译。
 
 ```bash
 pnpm --filter translation-userscript dev     # dev mode with HMR

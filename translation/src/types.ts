@@ -20,6 +20,13 @@ export interface DeepLXConfig extends ProviderConfig {
   url: string;
 }
 
+export interface VolcanoConfig extends ProviderConfig {
+  /** 火山引擎 AccessKey ID */
+  accessKey: string;
+  /** 火山引擎 Secret Access Key */
+  secretKey: string;
+}
+
 export interface LLMConfig extends ProviderConfig {
   /** OpenAI 兼容的接口地址，如 https://api.deepseek.com/v1/chat/completions */
   endpoint: string;
@@ -54,6 +61,7 @@ export interface Config {
   providers: {
     google: GoogleConfig;
     deepLX: DeepLXConfig;
+    volcano: VolcanoConfig;
     deepseek: LLMConfig;
     opencode: LLMConfig;
   };

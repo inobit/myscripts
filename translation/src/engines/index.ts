@@ -9,6 +9,7 @@ import { GoogleTranslator } from './google';
 import { DeepLXTranslator } from './deeplx';
 import { DeepSeekTranslator } from './deepseek';
 import { OpenCodeTranslator } from './opencode';
+import { VolcanoTranslator } from './volcano';
 import { fetchDict } from './pronunciation';
 
 export const translateAll: TranslateAllFn = async (text, config, onResult?) => {
@@ -24,6 +25,11 @@ export const translateAll: TranslateAllFn = async (text, config, onResult?) => {
   }
   if (config.providers.deepLX.enabled) {
     const engine = new DeepLXTranslator();
+    taskProviders.push(engine.name);
+    tasks.push(runEngine(engine, text, sourceLang, targetLang, config, onResult));
+  }
+  if (config.providers.volcano.enabled) {
+    const engine = new VolcanoTranslator();
     taskProviders.push(engine.name);
     tasks.push(runEngine(engine, text, sourceLang, targetLang, config, onResult));
   }

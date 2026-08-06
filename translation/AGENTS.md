@@ -2,7 +2,7 @@
 
 ## 项目概述
 
-划词翻译 + 输入弹窗翻译油猴脚本，支持 Google、DeepLX、DeepSeek 多 provider 并行翻译。
+划词翻译 + 输入弹窗翻译油猴脚本，支持 Google、DeepLX、DeepSeek、火山翻译多 provider 并行翻译。
 
 ## 技术栈
 
@@ -33,6 +33,8 @@ src/
 │   ├── base.ts          # 抽象基类
 │   ├── google.ts        # Google 翻译（免费 API，无需 key）
 │   ├── deeplx.ts        # DeepLX（key 嵌在 URL path 中）
+│   ├── volcano.ts       # 火山翻译（IAM 双密钥 + V4 HMAC 签名）
+│   ├── sign.ts          # 火山 V4 签名（纯 TS SHA-256/HMAC）
 │   ├── llm.ts           # LLM（OpenAI 兼容，默认 DeepSeek）
 │   └── index.ts         # translateAll 并行编排
 └── ui/                  # UI 组件（全部在 Shadow DOM 内）
@@ -84,6 +86,10 @@ import { GM_xmlhttpRequest, GM_setValue, GM_getValue, GM_registerMenuCommand } f
 ### DeepLX 鉴权
 
 DeepLX 的 API key 嵌在 URL path 中（如 `https://api.deeplx.org/<key>/translate`），**不使用** Authorization Bearer header。用户在设置面板配置完整 URL。
+
+### 火山翻译鉴权
+
+火山引擎使用 IAM 的 AccessKey ID + Secret Access Key 双密钥，通过 V4 HMAC-SHA256 签名鉴权（`engines/sign.ts` 实现，纯 TS，不依赖 `crypto.subtle`）。请求头包含 `X-Date`、`X-Content-Sha256`、`Authorization`，端点固定为 `translate.volcengineapi.com`（region: cn-north-1, service: translate, Action: TranslateText, Version: 2020-06-01）。语言代码映射：`zh-CN/zh-CHS→zh`、`zh-CHT→zh-Hant`、`en-US→en`。
 
 ### LLM 配置
 
