@@ -19,7 +19,7 @@ pnpm --filter translation-userscript dev     # dev mode with HMR
 pnpm --filter translation-userscript build   # output to dist/
 ```
 
-Install: [translation-userscript.user.js](https://github.com/inobit/myscripts/releases/download/translation/v0.2.0/translation-userscript.user.js)
+Install: [translation-userscript.user.js](https://github.com/inobit/myscripts/releases/download/translation/v0.2.1/translation-userscript.user.js)
 
 ### emacs-input
 
@@ -44,7 +44,7 @@ pnpm run build
 Push a tag in `{project}/v{version}` format to trigger a GitHub release:
 
 ```bash
-git tag translation/v0.2.0
+git tag translation/v0.2.1
 git tag emacs-input/v0.3.0
 git push --tags
 ```
