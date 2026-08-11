@@ -5,7 +5,7 @@
 
 import type { Config, TranslationResult } from '../types';
 import { getShadowRoot, getShadowHost } from './shadow';
-import { createProviderBlock } from './shared';
+import { createProviderBlock, PROVIDER_NAMES } from './shared';
 
 let currentCard: HTMLDivElement | null = null;
 let providerMap = new Map<string, ReturnType<typeof createProviderBlock>>();
@@ -13,15 +13,6 @@ let closeHandler: (() => void) | null = null;
 
 /** 关闭图标字符 */
 const CLOSE_CHAR = '×';
-
-/** 所有已知 provider 名称列表 */
-const PROVIDER_NAMES: Record<string, string> = {
-  google: 'Google',
-  deepLX: 'DeepLX',
-  volcano: '火山翻译',
-  deepseek: 'DeepSeek',
-  opencode: 'OpenCode',
-};
 
 /**
  * 显示结果卡片

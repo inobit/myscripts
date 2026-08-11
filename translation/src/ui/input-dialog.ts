@@ -5,20 +5,12 @@
 
 import type { Config, TranslateAllFn } from '../types';
 import { getShadowRoot, getShadowHost } from './shadow';
-import { createProviderBlock } from './shared';
+import { createProviderBlock, PROVIDER_NAMES } from './shared';
 
 let currentDialog: HTMLDivElement | null = null;
 let closeHandler: (() => void) | null = null;
 
 const CLOSE_CHAR = '×';
-
-/** 所有已知 provider 名称列表 */
-const PROVIDER_NAMES: Record<string, string> = {
-  google: 'Google',
-  deepLX: 'DeepLX',
-  deepseek: 'DeepSeek',
-  opencode: 'OpenCode',
-};
 
 /**
  * 显示输入翻译对话框
